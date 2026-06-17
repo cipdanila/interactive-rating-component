@@ -1,0 +1,348 @@
+/* ==========================================================================
+   1. CUSTOM PROPERTIES & ARCHITECTURE
+   ========================================================================== */
+:root {
+  /* Colors - Primary */
+  --clr-primary-orange: hsl(25, 97%, 53%);
+
+  /* Colors - Neutral */
+  --clr-neutral-white: hsl(0, 100%, 100%);
+  --clr-neutral-grey-500: hsl(217, 12%, 63%);
+  --clr-neutral-grey-900: hsl(213, 19%, 18%);
+  --clr-neutral-grey-950: hsl(216, 12%, 8%);
+
+  /* Typography */
+  --ff-sans: 'Overpass', sans-serif;
+  --fw-regular: 400;
+  --fw-bold: 700;
+}
+
+/* ==========================================================================
+   2. MODERN CSS RESET (CSS Remedy Context)
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+p,
+fieldset,
+legend {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--clr-neutral-grey-950);
+  color: var(--clr-neutral-white);
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-regular);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  
+  /* Layout engine split into a matrix to isolate card and footer */
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  justify-items: center;
+  padding-block: 2rem;
+  padding-inline: 1.5rem;
+}
+
+/* ==========================================================================
+   3. COMPONENT CONTAINMENT & ARCHITECTURE
+   ========================================================================== */
+.component-envelope {
+  max-inline-size: 25rem;
+  inline-size: 100%;
+}
+
+.rating-card {
+  background-color: var(--clr-neutral-grey-900);
+  padding-block: clamp(1.75rem, 6vw, 2.5rem); 
+  padding-inline: clamp(1.25rem, 5vw, 2rem); 
+  border-radius: 1rem;
+  transform: translate(0px, 6px);
+}
+
+/* ==========================================================================
+   4. STATE MANAGEMENT LAYER
+   ========================================================================== */
+[data-state="active"] {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-state="hidden"] {
+  display: none;
+}
+
+/* ==========================================================================
+   5. COMPONENT ELEMENTS (Icon & Typography)
+   ========================================================================== */
+.icon-shape {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--clr-neutral-white) 5%, transparent);
+  
+  display: grid;
+  place-content: center;
+  transform: translate(5px, -2px);
+  margin-block-end: 1.25rem;
+}
+
+.icon-shape img {
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  object-fit: contain; 
+}
+
+.card-heading {
+  font-size: 1.625rem;
+  font-weight: var(--fw-bold);
+  color: var(--clr-neutral-white);
+  letter-spacing: -0.045em;
+  transform: translate(2px, -4px); 
+  margin-block-end: 0.5rem;
+}
+
+.card-description {
+  font-size: 0.938rem; 
+  color: var(--clr-neutral-grey-500);
+  line-height: 1.5;
+  letter-spacing: -0.03em;
+  transform: translate(3px, -4px); 
+  margin-block-end: 1.5rem;
+}
+
+/* ==========================================================================
+   6. RATING SELECTION ARCHITECTURE (1-5 Track)
+   ========================================================================== */
+.rating-fieldset {
+  border: none;
+  transform: translate(1px, -6px);
+  margin-block-end: 1.25rem;
+}
+
+.rating-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-inline-size: 17.375rem; 
+  inline-size: 100%;
+  margin-inline: auto;
+  gap: 0.5rem;
+}
+
+.rating-control {
+  position: relative;
+}
+
+.rating-label {
+  inline-size: 2.5rem; 
+  block-size: 2.5rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--clr-neutral-white) 5%, transparent);
+  color: var(--clr-neutral-grey-500);
+  font-weight: var(--fw-bold);
+  
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.rating-label:hover {
+  background-color: var(--clr-primary-orange);
+  color: var(--clr-neutral-grey-900);
+}
+
+.visually-hidden:checked + .rating-label {
+  background-color: var(--clr-neutral-white);
+  color: var(--clr-neutral-grey-900);
+}
+
+.visually-hidden:focus-visible + .rating-label {
+  outline: 2px solid var(--clr-primary-orange);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   7. ACTION BUTTONS & UTILITIES
+   ========================================================================== */
+.submit-button {
+  inline-size: 97%; 
+  margin-inline: auto; 
+  block-size: 2.75rem;
+  border-radius: 6.25rem;
+  border: none;
+  background-color: var(--clr-primary-orange);
+  color: var(--clr-neutral-white);
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-bold);
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07rem;
+  
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.submit-button:hover {
+  background-color: var(--clr-neutral-white);
+  color: var(--clr-neutral-grey-900);
+}
+
+.submit-button:focus-visible {
+  outline: 2px solid var(--clr-neutral-white);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   8. THANK YOU STATE STYLING
+   ========================================================================== */
+.text-center {
+  text-align: center;
+  align-items: center;
+}
+
+.illustration-shape {
+  margin-block-end: 1.5rem;
+}
+
+.feedback-badge {
+  background-color: var(--clr-neutral-grey-950);
+  color: var(--clr-primary-orange);
+  padding-block: 0.25rem;
+  padding-inline: 0.75rem;
+  border-radius: 1.375rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  display: inline-block;
+  margin-block-end: 1.5rem;
+}
+
+.badge-text {
+  font-weight: var(--fw-regular);
+}
+
+/* ==========================================================================
+   9. SECONDARY ACTIONS (Reset Layout)
+   ========================================================================== */
+.type-secondary {
+  margin-block-start: 1.15rem;
+}
+
+/* ==========================================================================
+   10. ATTRIBUTION SUB-LEVEL FOOTER
+   ========================================================================== */
+.attribution {
+  font-size: 0.6875rem;
+  text-align: center;
+  color: var(--clr-neutral-grey-500);
+}
+
+.attribution a {
+  color: var(--clr-primary-orange);
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.attribution a:hover {
+  color: var(--clr-neutral-white);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   11. DESKTOP LAYOUT OVERRIDES (min-width: 75em / 1200px)
+   ========================================================================= */
+@media (min-width: 75em) {
+  body {
+    padding-inline: 0;
+  }
+
+  .component-envelope {
+    max-inline-size: 25.875rem; 
+  }
+
+  .rating-card {
+    padding-block: clamp(1.5rem, 3vw, 2.125rem);
+    padding-inline: clamp(1.25rem, 5vw, 2rem); 
+    border-radius: 2rem;
+    transform: translate(0px, 10px);
+  }
+
+  .icon-shape {
+    inline-size: 3rem;
+    block-size: 3rem;
+    border-radius: 50%;
+    transform: translate(1px, -2px);
+    margin-block-end: 1.25rem; 
+  }
+
+  .icon-shape img {
+    inline-size: 1.5rem;
+    block-size: 1rem;
+    object-fit: contain; 
+  }
+
+  .card-heading {
+    font-size: 1.75rem;
+    letter-spacing: normal;
+    transform: translate(0px, 10px);
+    margin-block-end: 0.75rem;
+  }
+
+  .card-description {
+    letter-spacing: normal;
+    transform: translate(0px, 4px);
+    line-height: 1.6;
+    margin-block-end: 1.75rem;
+  }
+
+  .rating-fieldset {
+    transform: translate(-4px, 2px);
+    margin-block-end: 2rem;
+  }
+
+  .rating-group {
+    max-inline-size: 21rem; 
+    inline-size: 100%;
+    margin-inline: auto;
+    gap: 0.5rem; 
+  }
+
+  .rating-label {
+    inline-size: 3.125rem; 
+    block-size: 3.125rem;
+    border-radius: 50%;
+  }
+
+  .submit-button {
+    inline-size: 98%;
+    color: var(--clr-neutral-grey-900);
+    letter-spacing: 0.125rem;
+    transform: translate(-4px, 4px);
+  }
+}
