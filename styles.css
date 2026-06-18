@@ -2,16 +2,13 @@
    1. CUSTOM PROPERTIES & ARCHITECTURE
    ========================================================================== */
 :root {
-  /* Colors - Primary */
   --clr-primary-orange: hsl(25, 97%, 53%);
 
-  /* Colors - Neutral */
   --clr-neutral-white: hsl(0, 100%, 100%);
   --clr-neutral-grey-500: hsl(217, 12%, 63%);
   --clr-neutral-grey-900: hsl(213, 19%, 18%);
   --clr-neutral-grey-950: hsl(216, 12%, 8%);
 
-  /* Typography */
   --ff-sans: 'Overpass', sans-serif;
   --fw-regular: 400;
   --fw-bold: 700;
@@ -45,7 +42,6 @@ body {
   font-size: 0.9375rem;
   line-height: 1.5;
   
-  /* Layout engine split into a matrix to isolate card and footer */
   display: grid;
   grid-template-rows: 1fr auto;
   align-items: center;
@@ -208,10 +204,10 @@ body {
 
 .visually-hidden {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 0.0625rem;
+  height: 0.0625rem;
   padding: 0;
-  margin: -1px;
+  margin: -0.0625rem;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
@@ -260,6 +256,7 @@ body {
   font-size: 0.6875rem;
   text-align: center;
   color: var(--clr-neutral-grey-500);
+  margin-block-start: 2rem;
 }
 
 .attribution a {
@@ -276,7 +273,7 @@ body {
 
 /* ==========================================================================
    11. DESKTOP LAYOUT OVERRIDES (min-width: 75em / 1200px)
-   ========================================================================= */
+   ========================================================================== */
 @media (min-width: 75em) {
   body {
     padding-inline: 0;
@@ -341,8 +338,21 @@ body {
 
   .submit-button {
     inline-size: 98%;
-    color: var(--clr-neutral-grey-900);
     letter-spacing: 0.125rem;
     transform: translate(-4px, 4px);
+  }
+}
+
+/* ==========================================================================
+   12. ACCESSIBILITY OVERRIDES (Reduced Motion Support)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
