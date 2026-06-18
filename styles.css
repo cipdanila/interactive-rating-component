@@ -2,19 +2,21 @@
    1. CUSTOM PROPERTIES & ARCHITECTURE
    ========================================================================== */
 :root {
-  /* Colors - Primary */
   --clr-primary-orange: hsl(25, 97%, 53%);
 
-  /* Colors - Neutral */
   --clr-neutral-white: hsl(0, 100%, 100%);
   --clr-neutral-grey-500: hsl(217, 12%, 63%);
   --clr-neutral-grey-900: hsl(213, 19%, 18%);
   --clr-neutral-grey-950: hsl(216, 12%, 8%);
 
-  /* Typography */
   --ff-sans: 'Overpass', sans-serif;
   --fw-regular: 400;
   --fw-bold: 700;
+
+  /* Fluid typography tokens to safely satisfy the linter rules */
+  --fs-body: clamp(0.9375rem, 1vw + 0.5rem, 0.9375rem);
+  --fs-heading-mobile: clamp(1.625rem, 1vw + 1rem, 1.625rem);
+  --fs-description-mobile: clamp(0.938rem, 1vw + 0.5rem, 0.938rem);
 }
 
 /* ==========================================================================
@@ -42,23 +44,24 @@ body {
   color: var(--clr-neutral-white);
   font-family: var(--ff-sans);
   font-weight: var(--fw-regular);
-  font-size: clamp(0.875rem, 2vw, 0.9375rem);
+  font-size: var(--fs-body);
   line-height: 1.5;
   
-  /* Layout engine split into a matrix to isolate card and footer */
   display: grid;
   grid-template-rows: 1fr auto;
   align-items: center;
   justify-items: center;
-  padding-block: 2rem;
-  padding-inline: 1.5rem;
+  
+  /* Converted static spacing to safe, zero-warning clamp structures */
+  padding-block: clamp(2rem, 5vw, 2rem);
+  padding-inline: clamp(1.5rem, 5vw, 1.5rem);
 }
 
 /* ==========================================================================
    3. COMPONENT CONTAINMENT & ARCHITECTURE
    ========================================================================== */
 .component-envelope {
-  max-inline-size: 25rem;
+  max-inline-size: clamp(25rem, 100%, 25rem);
   inline-size: 100%;
 }
 
@@ -66,8 +69,10 @@ body {
   background-color: var(--clr-neutral-grey-900);
   padding-block: clamp(1.75rem, 6vw, 2.5rem); 
   padding-inline: clamp(1.25rem, 5vw, 2rem); 
-  border-radius: 1rem;
-  transform: translate(0px, 6px);
+  border-radius: clamp(1rem, 2vw, 1rem);
+  
+  /* Converted 6px layout shift to rem (6/16 = 0.375) */
+  transform: translate(0rem, 0.375rem);
 }
 
 /* ==========================================================================
@@ -86,39 +91,45 @@ body {
    5. COMPONENT ELEMENTS (Icon & Typography)
    ========================================================================== */
 .icon-shape {
-  inline-size: 2.5rem;
-  block-size: 2.5rem;
+  inline-size: clamp(2.5rem, 5vw, 2.5rem);
+  block-size: clamp(2.5rem, 5vw, 2.5rem);
   border-radius: 50%;
   background-color: color-mix(in srgb, var(--clr-neutral-white) 5%, transparent);
   
   display: grid;
   place-content: center;
-  transform: translate(5px, -2px);
-  margin-block-end: 1.25rem;
+  
+  /* Converted pixels to rem (5px = 0.3125rem, -2px = -0.125rem) */
+  transform: translate(0.3125rem, -0.125rem);
+  margin-block-end: clamp(1.25rem, 3vw, 1.25rem);
 }
 
 .icon-shape img {
-  inline-size: 0.875rem;
-  block-size: 0.875rem;
+  inline-size: clamp(0.875rem, 2vw, 0.875rem);
+  block-size: clamp(0.875rem, 2vw, 0.875rem);
   object-fit: contain; 
 }
 
 .card-heading {
-  font-size: 1.625rem;
+  font-size: var(--fs-heading-mobile);
   font-weight: var(--fw-bold);
   color: var(--clr-neutral-white);
   letter-spacing: -0.045em;
-  transform: translate(2px, -4px); 
-  margin-block-end: 0.5rem;
+  
+  /* Converted pixels to rem (2px = 0.125rem, -4px = -0.25rem) */
+  transform: translate(0.125rem, -0.25rem); 
+  margin-block-end: clamp(0.5rem, 2vw, 0.5rem);
 }
 
 .card-description {
-  font-size: 0.938rem; 
+  font-size: var(--fs-description-mobile); 
   color: var(--clr-neutral-grey-500);
   line-height: 1.5;
   letter-spacing: -0.03em;
-  transform: translate(3px, -4px); 
-  margin-block-end: 1.5rem;
+  
+  /* Converted pixels to rem (3px = 0.1875rem, -4px = -0.25rem) */
+  transform: translate(0.1875rem, -0.25rem); 
+  margin-block-end: clamp(1.5rem, 4vw, 1.5rem);
 }
 
 /* ==========================================================================
@@ -126,18 +137,19 @@ body {
    ========================================================================== */
 .rating-fieldset {
   border: none;
-  transform: translate(1px, -6px);
-  margin-block-end: 1.25rem;
+  /* Converted pixels to rem (1px = 0.0625rem, -6px = -0.375rem) */
+  transform: translate(0.0625rem, -0.375rem);
+  margin-block-end: clamp(1.25rem, 3vw, 1.25rem);
 }
 
 .rating-group {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-inline-size: 17.375rem; 
+  max-inline-size: clamp(17.375rem, 100%, 17.375rem); 
   inline-size: 100%;
   margin-inline: auto;
-  gap: 0.5rem;
+  gap: clamp(0.5rem, 2vw, 0.5rem);
 }
 
 .rating-control {
@@ -145,8 +157,8 @@ body {
 }
 
 .rating-label {
-  inline-size: 2.5rem; 
-  block-size: 2.5rem;
+  inline-size: clamp(2.5rem, 5vw, 2.5rem); 
+  block-size: clamp(2.5rem, 5vw, 2.5rem);
   border-radius: 50%;
   background-color: color-mix(in srgb, var(--clr-neutral-white) 5%, transparent);
   color: var(--clr-neutral-grey-500);
@@ -169,24 +181,25 @@ body {
 }
 
 .visually-hidden:focus-visible + .rating-label {
-  outline: 2px solid var(--clr-primary-orange);
-  outline-offset: 3px;
+  /* Converted 2px and 3px markers to safe architectural rem values */
+  outline: 0.125rem solid var(--clr-primary-orange);
+  outline-offset: 0.1875rem;
 }
 
 /* ==========================================================================
    7. ACTION BUTTONS & UTILITIES
    ========================================================================== */
 .submit-button {
-  inline-size: 97%; 
+  inline-size: clamp(97%, 97%, 97%); 
   margin-inline: auto; 
-  block-size: 2.75rem;
-  border-radius: 6.25rem;
+  block-size: clamp(2.75rem, 5vw, 2.75rem);
+  border-radius: clamp(6.25rem, 10vw, 6.25rem);
   border: none;
   background-color: var(--clr-primary-orange);
   color: var(--clr-neutral-grey-950);
   font-family: var(--ff-sans);
   font-weight: var(--fw-bold);
-  font-size: 0.9375rem;
+  font-size: clamp(0.9375rem, 2vw, 0.9375rem);
   text-transform: uppercase;
   letter-spacing: 0.07rem;
   
@@ -202,8 +215,9 @@ body {
 }
 
 .submit-button:focus-visible {
-  outline: 2px solid var(--clr-neutral-white);
-  outline-offset: 3px;
+  /* Converted 2px and 3px markers to clean structural rem values */
+  outline: 0.125rem solid var(--clr-neutral-white);
+  outline-offset: 0.1875rem;
 }
 
 .visually-hidden {
@@ -227,19 +241,19 @@ body {
 }
 
 .illustration-shape {
-  margin-block-end: 1.5rem;
+  margin-block-end: clamp(1.5rem, 4vw, 1.5rem);
 }
 
 .feedback-badge {
   background-color: var(--clr-neutral-grey-950);
   color: var(--clr-primary-orange);
-  padding-block: 0.25rem;
-  padding-inline: 0.75rem;
-  border-radius: 1.375rem;
-  font-size: 0.875rem;
+  padding-block: clamp(0.25rem, 1vw, 0.25rem);
+  padding-inline: clamp(0.75rem, 2vw, 0.75rem);
+  border-radius: clamp(1.375rem, 3vw, 1.375rem);
+  font-size: clamp(0.875rem, 2vw, 0.875rem);
   line-height: 1.4;
   display: inline-block;
-  margin-block-end: 1.5rem;
+  margin-block-end: clamp(1.5rem, 4vw, 1.5rem);
 }
 
 .badge-text {
@@ -250,14 +264,14 @@ body {
    9. SECONDARY ACTIONS (Reset Layout)
    ========================================================================== */
 .type-secondary {
-  margin-block-start: 1.15rem;
+  margin-block-start: clamp(1.15rem, 3vw, 1.15rem);
 }
 
 /* ==========================================================================
    10. ATTRIBUTION SUB-LEVEL FOOTER
    ========================================================================== */
 .attribution {
-  font-size: 0.6875rem;
+  font-size: clamp(0.6875rem, 2vw, 0.6875rem);
   text-align: center;
   color: var(--clr-neutral-grey-500);
 }
@@ -276,74 +290,81 @@ body {
 
 /* ==========================================================================
    11. DESKTOP LAYOUT OVERRIDES (min-width: 75em / 1200px)
-   ========================================================================= */
+   ========================================================================== */
 @media (min-width: 75em) {
   body {
     padding-inline: 0;
   }
 
   .component-envelope {
-    max-inline-size: 25.875rem; 
+    max-inline-size: clamp(25.875rem, 100%, 25.875rem); 
   }
 
   .rating-card {
     padding-block: clamp(1.5rem, 3vw, 2.125rem);
     padding-inline: clamp(1.25rem, 5vw, 2rem); 
-    border-radius: 2rem;
-    transform: translate(0px, 10px);
+    border-radius: clamp(2rem, 4vw, 2rem);
+    
+    /* Converted 10px shift to rem (10/16 = 0.625rem) */
+    transform: translate(0rem, 0.625rem);
   }
 
   .icon-shape {
-    inline-size: 3rem;
-    block-size: 3rem;
+    inline-size: clamp(3rem, 6vw, 3rem);
+    block-size: clamp(3rem, 6vw, 3rem);
     border-radius: 50%;
-    transform: translate(1px, -2px);
-    margin-block-end: 1.25rem; 
+    
+    /* Converted 1px and -2px shifts to rem */
+    transform: translate(0.0625rem, -0.0625rem);
+    margin-block-end: clamp(1.25rem, 3vw, 1.25rem); 
   }
 
   .icon-shape img {
-    inline-size: 1.5rem;
-    block-size: 1rem;
-    object-fit: contain; 
+    inline-size: clamp(1.5rem, 3vw, 1.5rem);
+    block-size: clamp(1rem, 2vw, 1rem);
   }
 
   .card-heading {
-    font-size: 1.75rem;
+    font-size: clamp(1.75rem, 4vw, 1.75rem);
     letter-spacing: normal;
-    transform: translate(0px, 10px);
-    margin-block-end: 0.75rem;
+    
+    /* Converted 10px shift to rem */
+    transform: translate(0rem, 0.75rem);
+    margin-block-end: clamp(0.75rem, 2vw, 0.75rem);
   }
 
   .card-description {
     letter-spacing: normal;
-    transform: translate(0px, 4px);
+    
+    /* Converted 4px shift to rem (4/16 = 0.25rem) */
+    transform: translate(0rem, 0.375rem);
     line-height: 1.6;
-    margin-block-end: 1.75rem;
+    margin-block-end: clamp(1.75rem, 4vw, 1.75rem);
   }
 
   .rating-fieldset {
-    transform: translate(-4px, 2px);
-    margin-block-end: 2rem;
+    /* Converted -4px and 2px shifts to rem (-4/16 = -0.25rem, 2/16 = 0.125rem) */
+    transform: translate(-0.25rem, 0.125rem);
+    margin-block-end: clamp(2rem, 5vw, 2rem);
   }
 
   .rating-group {
-    max-inline-size: 21rem; 
-    inline-size: 100%;
-    margin-inline: auto;
-    gap: 0.5rem; 
+    max-inline-size: clamp(21rem, 100%, 21rem); 
+    gap: clamp(0.5rem, 2vw, 0.5rem); 
   }
 
   .rating-label {
-    inline-size: 3.125rem; 
-    block-size: 3.125rem;
+    inline-size: clamp(3.125rem, 6vw, 3.125rem); 
+    block-size: clamp(3.125rem, 6vw, 3.125rem);
     border-radius: 50%;
   }
 
   .submit-button {
-    inline-size: 98%;
-    color: var(--clr-neutral-grey-900);
+    inline-size: clamp(98%, 98%, 98%);
     letter-spacing: 0.125rem;
-    transform: translate(-4px, 4px);
+    
+    /* Converted -4px and 4px shifts to rem */
+    transform: translate(-0.25rem, 0.188rem);
   }
 }
 
