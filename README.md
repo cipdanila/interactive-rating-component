@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://frontendmentor.io](https://frontendmentor.io)
-- Live Site URL: [https://github.io](https://github.io)
+- Solution URL: [https://github.com/cipdanila/interactive-rating-component](https://github.com/cipdanila/interactive-rating-component)
+- Live Site URL: [https://cipdanila.github.io/interactive-rating-component/](https://cipdanila.github.io/interactive-rating-component/)
 
 ## My process
 
